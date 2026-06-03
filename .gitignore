@@ -1,0 +1,11 @@
+#comando para ignorar ambientes virtuais
+.venv/
+venv/
+env/
+
+#comando para ignorar arquivos do PyCharm
+.idea/
+
+#comenado para ignorar arquivos temporários do Python
+__pycache__/
+*.pyc

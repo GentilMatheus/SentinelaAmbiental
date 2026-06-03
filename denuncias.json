@@ -1,0 +1,28 @@
+[
+    {
+        "id": "SENTINELA-0001",
+        "autor": "Matheus",
+        "cidade": "Rio Grande",
+        "categoria": "Lixo jogado na rua",
+        "descricao": "Muito lixo sendo descartado em local inapropriado ",
+        "data": "02/06/2026 04:06",
+        "status": "Pendente",
+        "coordenadas": {
+            "lat": -32.0332,
+            "lng": -52.0986
+        }
+    },
+    {
+        "id": "SENTINELA-0002",
+        "autor": "Paula",
+        "cidade": "Rio Grande",
+        "categoria": "Árvore caída",
+        "descricao": "Arvore caida na rua roberto socoowisk em frente ao DOG DO ALEMÃO",
+        "data": "02/06/2026 04:52",
+        "status": "Registrado",
+        "coordenadas": {
+            "lat": -32.0332,
+            "lng": -52.0986
+        }
+    }
+]
