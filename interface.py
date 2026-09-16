@@ -1,5 +1,6 @@
 import flet as ft
 
+
 class InterfaceApp:
     def __init__(self, page, backend):
         self.page = page
@@ -8,7 +9,21 @@ class InterfaceApp:
         self.page.padding = 20
         self.page.scroll = ft.ScrollMode.AUTO
         self.page.theme_mode = ft.ThemeMode.LIGHT
+
+        # Variável para controlar o estado do Alto Contraste
+        self.alto_contraste = False
+
         self.criar_interface()
+
+    def alternar_contraste(self, e=None):
+        self.alto_contraste = not self.alto_contraste
+        if self.alto_contraste:
+            self.page.bgcolor = ft.Colors.YELLOW_100
+            self.btn_contraste.content = ft.Text("Modo Padrão", color=ft.Colors.BLACK, weight=ft.FontWeight.BOLD)
+        else:
+            self.page.bgcolor = None
+            self.btn_contraste.content = ft.Text("Alto Contraste")
+        self.page.update()
 
     def mostrar_feed(self, e=None):
         self.tela_formulario.visible = False
@@ -69,7 +84,7 @@ class InterfaceApp:
             elif denuncia["categoria"] == "Esgoto vazando":
                 esgoto += 1
 
-        #card de Estatísticas usando apenas Emojis
+        # card de Estatísticas usando apenas Emojis
         self.feed.controls.append(
             ft.Card(
                 content=ft.Container(
@@ -121,15 +136,24 @@ class InterfaceApp:
         self.status = ft.Text("Aguardando localização...")
         self.feed = ft.Column()
 
-        #tela do feed
+        # Botão de Alto Contraste
+        self.btn_contraste = ft.Button(
+            content=ft.Text("Alto Contraste"),
+            icon=ft.Icons.CONTRAST,
+            on_click=self.alternar_contraste
+        )
+
+        # tela do feed
         self.tela_feed = ft.Container(
             width=500,
             visible=True,
             content=ft.Column([
-                ft.Text("Projeto aluno Matheus Gentil, RU:4476283", size=10,
-                        color=ft.Colors.GREY_500),
+                ft.Row([
+                    ft.Text("Projeto aluno Matheus Gentil, RU:4476283", size=10, color=ft.Colors.GREY_500),
+                    self.btn_contraste
+                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
 
-                #titulo usando o icone na pasta assets
+                # titulo usando o icone na pasta assets
                 ft.Row([
                     ft.Image(src="img.png", width=45, height=45, fit="contain"),
                     ft.Text("Sentinela Ambiental", size=28, weight=ft.FontWeight.BOLD)
@@ -138,12 +162,11 @@ class InterfaceApp:
                 ft.Text("Ajude a cuidar de nossa querida cidade", size=16),
                 ft.Divider(),
 
-                #botão usando apenas Emojis
-                ft.ElevatedButton(
-                    "➕ Adicionar Denúncia",
+                # botão usando apenas Emojis
+                ft.Button(
+                    content=ft.Text("➕ Adicionar Denúncia", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
                     height=55,
                     bgcolor=ft.Colors.GREEN_700,
-                    color=ft.Colors.WHITE,
                     on_click=self.mostrar_formulario
                 ),
 
@@ -153,7 +176,7 @@ class InterfaceApp:
             ])
         )
 
-        #tela do formulario
+        # tela do formulario
         self.tela_formulario = ft.Container(
             width=500,
             visible=False,
@@ -166,12 +189,24 @@ class InterfaceApp:
                 self.categoria,
                 self.descricao,
 
-                ft.ElevatedButton("📍 Capturar Localização", height=55, on_click=self.capturar_localizacao),
+                ft.Button(
+                    content=ft.Text("📍 Capturar Localização"),
+                    height=55,
+                    on_click=self.capturar_localizacao
+                ),
                 self.status,
 
-                ft.ElevatedButton("✅ Enviar Denúncia", height=60, bgcolor=ft.Colors.GREEN_700, color=ft.Colors.WHITE,
-                                  on_click=self.enviar_denuncia),
-                ft.TextButton("❌ Cancelar", height=50, on_click=self.mostrar_feed)
+                ft.Button(
+                    content=ft.Text("✅ Enviar Denúncia", color=ft.Colors.WHITE, size=16, weight=ft.FontWeight.BOLD),
+                    height=60,
+                    bgcolor=ft.Colors.GREEN_700,
+                    on_click=self.enviar_denuncia
+                ),
+                ft.Button(
+                    content=ft.Text("❌ Cancelar", color=ft.Colors.GREY_700),
+                    height=50,
+                    on_click=self.mostrar_feed
+                )
             ])
         )
         self.page.add(self.tela_feed, self.tela_formulario)
