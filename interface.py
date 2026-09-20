@@ -10,7 +10,7 @@ class InterfaceApp:
         self.page.scroll = ft.ScrollMode.AUTO
         self.page.theme_mode = ft.ThemeMode.LIGHT
 
-        # Variável para controlar o estado do Alto Contraste
+        #variável para controlar o estado do alto contraste
         self.alto_contraste = False
 
         self.criar_interface()
@@ -84,7 +84,7 @@ class InterfaceApp:
             elif denuncia["categoria"] == "Esgoto vazando":
                 esgoto += 1
 
-        # card de Estatísticas usando apenas Emojis
+        #card de estatísticas usando apenas emojis
         self.feed.controls.append(
             ft.Card(
                 content=ft.Container(
@@ -136,7 +136,7 @@ class InterfaceApp:
         self.status = ft.Text("Aguardando localização...")
         self.feed = ft.Column()
 
-        # Botão de Alto Contraste
+        #botão de alto contraste
         self.btn_contraste = ft.Button(
             content=ft.Text("Alto Contraste"),
             icon=ft.Icons.CONTRAST,

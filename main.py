@@ -6,5 +6,5 @@ def main(page: ft.Page):
     backend = BackendSentinela()
     InterfaceApp(page, backend)
 
-if __name__ == "__main__":
+if __name__ == "__main__": #config ngrok
     ft.run(main, assets_dir="assets", view=ft.AppView.WEB_BROWSER, port=8550)
